@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="gcs_whatsapp_composer_view_form" model="ir.ui.view">
+        <field name="name">gcs.whatsapp.composer.view.form</field>
+        <field name="model">gcs.whatsapp.composer</field>
+        <field name="arch" type="xml">
+            <form string="Whatsapp">
+                <sheet>
+                    <group>
+                        <field name="res_id" invisible="1"/>
+                        <field name="res_ids" invisible="1"/>
+                        <field name="res_model" invisible="1"/>
+                        <field name="template_id" invisible="1" force_save="1"/>
+                        <label for="gcs_partner_ids" string="Recipients"/>
+
+                        <div>
+                            <span name="document_followers_text">Followers of the document and</span>
+                            <field name="gcs_partner_ids" widget="many2many_tags"/>
+                        </div>
+                    </group>
+                    <group>
+                        <field name="body" force_save="1" readonly="1"/>
+                        <field name="attachments" widget="many2many_binary" invisible="1"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Send Whatsapp" type="object" class="oe_highlight" name="action_send_whatsapp"/>
+                    <button string="Close" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="gcs_whatsapp_composer_action_form" model="ir.actions.act_window">
+        <field name="name">Send Whatsapp Message</field>
+        <field name="res_model">gcs.whatsapp.composer</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

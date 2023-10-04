@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="gcs_whatsapp_view_form" model="ir.ui.view">
+        <field name="name">gcs.whatsapp.view.form</field>
+        <field name="model">gcs.whatsapp</field>
+        <field name="arch" type="xml">
+            <form string="Whatsapp">
+                <header>
+                    <button name="action_resend" string="Resend" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('state', '!=', 'failed')]}"/>
+                    <field name="state" widget="statusbar" force_save="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id" string="Recipient" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="body" string="Message" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="response" string="Status"/>
+                        <field name="template_id" string="template_id" invisible="1"/>
+                        <field name="record_id" string="record_id" invisible="1"/>
+                    </group>
+                    <group>
+                        <field name="attachments" widget="many2many_binary" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="gcs_whatsapp_view_tree" model="ir.ui.view">
+        <field name="name">gcs.whatsapp.view.tree</field>
+        <field name="model">gcs.whatsapp</field>
+        <field name="arch" type="xml">
+            <tree string="Whatsapp Templates">
+                <field name="partner_id"/>
+                <field name="message_id"/>
+                <field name="response_status"/>
+                <field name="state"/>
+                <button name="action_resend" string="Resend" type="object" icon="fa-repeat"
+                        states="failed"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="gcs_whatsapp_action" model="ir.actions.act_window">
+        <field name="name">Whatsapp</field>
+        <field name="res_model">gcs.whatsapp</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="gcs_whatsapp_menu"
+              name="Whatsapp Logs"
+              parent="gcs_whatsapp_main_menu"
+              action="gcs_whatsapp_action"
+              sequence="1"/>
+
+</odoo>

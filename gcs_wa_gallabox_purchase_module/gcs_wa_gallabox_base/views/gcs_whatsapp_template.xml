@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="gcs_whatsapp_template_view_form" model="ir.ui.view">
+        <field name="name">gcs.whatsapp.template.view.form</field>
+        <field name="model">gcs.whatsapp.template</field>
+        <field name="arch" type="xml">
+            <form string="Whatsapp Templates">
+                <header>
+
+                    <button name="gcs_confirm_button" type="object" string="Confirm"
+                            class="oe_highlight" attrs="{'invisible': [('template_state', '!=', 'set_to_draft')]}"/>
+
+                    <button name="gcs_draft_button" type="object" string="Set to Draft"
+                            class="oe_stat_button" attrs="{'invisible': [('template_state', '!=', 'confirm')]}"/>
+                    <field name="template_state" widget="statusbar" force_save="1"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Whatsapp Template"/>
+                        <h1>
+                            <field name="name" readonly="1" force_save="1"/>
+                        </h1>
+                        <group>
+                            <field name="model_id" placeholder="e.g. Contact"
+                                   options='{"no_open": True, "no_create": True}'
+                                   attrs="{'readonly': [('template_state', '=', 'confirm')]}"/>
+                            <field name="language" options="{'no_create': True, 'no_edit': True, 'no_open': True}"
+                                   readonly="1" force_save="1"/>
+                            <field name="category" readonly="1" force_save="1"/>
+                            <field name="message_type" widget="radio" readonly="1" force_save="1"/>
+
+                            <field name="image" filename="document_fname_image" class="gcs_oe_avatar"
+                                   attrs="{'invisible': [('message_type', '!=', 'image')]}" readonly="1"
+                                   force_save="1"/>
+                            <field name="document_fname_image" invisible="1"/>
+
+                            <field name="video" filename="document_fname_video" class="gcs_oe_avatar" widget="video"
+                                   options="{'autoplay': 1}"
+                                   attrs="{'invisible': [('message_type', '!=', 'video')]}" readonly="1"
+                                   force_save="1"/>
+                            <field name="document_fname_video" invisible="1"/>
+
+                            <field name="document" filename="document_fname_document" class="gcs_oe_avatar"
+                                   attrs="{'invisible': [('message_type', '!=', 'document')]}"
+                                   widget="document_viewer" readonly="1" force_save="1"/>
+                            <field name="document_fname_document" invisible="1"/>
+
+                            <field name="header" readonly="1"
+                                   force_save="1"/>
+                            <field name="footer" readonly="1" force_save="1"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </div>
+                    <notebook>
+                        <page string="Message Body" name="message_body">
+                            <group>
+                                <field name="body" nolabel="1" colspan="2"
+                                      force_save="1"/>
+                            </group>
+                        </page>
+
+                        <page string="Placeholders" name="placeholders">
+                            <field name="template_placeholder_id">
+<!--                                 attrs="{'readonly': [('template_state', '=', 'confirm')]}"-->
+                                <tree editable="bottom" create="false">
+                                    <field name="variable_name"/>
+                                    <field name="field" options='{"no_open": True, "no_create": True}' domain="[('model_id', '=', parent.model_id)]"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Call To Action" name="call to action">
+                            <group col="4">
+                                <group>
+                                    <field name="phone_flag" string=" " readonly="1" force_save="1"/>
+                                    <field name="url_flag" string=" " readonly="1" force_save="1"/>
+                                </group>
+                                <group>
+                                    <p>Phone</p>
+                                    <field name="url_type" readonly="1" force_save="1"/>
+                                </group>
+
+                                <group>
+                                    <field name="button_name_of_phone_number"
+                                           readonly="1" force_save="1" string=" " placeholder="Ex: Call Us"/>
+                                    <field name="button_name_of_url" readonly="1" force_save="1" string=" "
+                                           placeholder="Ex: Visit Website"/>
+                                </group>
+                                <group>
+                                    <field name="phone_number" readonly="1" force_save="1" placeholder="Ex: +91"/>
+                                    <field name="url" readonly="1" force_save="1"
+                                           placeholder="Ex: https://gallabox.com"/>
+                                    <field name="example_url"
+                                           attrs="{'invisible': [('url_type', '=', 'static_url')]}"
+                                           placeholder="Ex: Call Us" readonly="1" force_save="1"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Quick Reply" name="quick reply">
+                            <field name="template_quick_reply" readonly="1" force_save="1">
+                                <tree editable="bottom">
+                                    <field name="button_name"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="gcs_whatsapp_template_view_tree" model="ir.ui.view">
+        <field name="name">gcs.whatsapp.template.view.tree</field>
+        <field name="model">gcs.whatsapp.template</field>
+        <field name="arch" type="xml">
+            <tree string="Whatsapp Templates">
+                <field name="name"/>
+                <field name="model_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="gcs_whatsapp_template_view_search" model="ir.ui.view">
+        <field name="name">gcs.whatsapp.template.view.search</field>
+        <field name="model">gcs.whatsapp.template</field>
+        <field name="arch" type="xml">
+            <search string="Search Whatsapp Templates">
+                <field name="name"/>
+                <field name="model_id"/>
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="gcs_whatsapp_template_action" model="ir.actions.act_window">
+        <field name="name">Templates</field>
+        <field name="res_model">gcs.whatsapp.template</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="gcs_whatsapp_main_menu"
+              parent="base.menu_custom"
+              name="Whatsapp"
+              sequence="1"/>
+
+
+    <menuitem id="gcs_whatsapp_template_menu"
+              name="Whatsapp Templates"
+              parent="gcs_whatsapp_main_menu"
+              sequence="2"
+              action="gcs_whatsapp_template_action"/>
+</odoo>
+

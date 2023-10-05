@@ -1,0 +1,14 @@
+<odoo>
+    <record id="gcs_sales_inherit" model="ir.ui.view">
+        <field name="name">GcsSalesInherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form//header" position="inside">
+                <button name="gcs_popup" type="object" string="Send By Whatsapp"
+                        class="btn btn-success" icon="fa-whatsapp"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

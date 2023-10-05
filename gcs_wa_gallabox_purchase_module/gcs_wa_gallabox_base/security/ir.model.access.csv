@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gcs_whatsapp,gcs.whatsapp,model_gcs_whatsapp,,1,1,1,1
+access_gcs_whatsapp_template,gcs.whatsapp.template,model_gcs_whatsapp_template,,1,1,1,1
+access_gcs_whatsapp_template_placeholder,gcs.whatsapp.template.placeholder,model_gcs_whatsapp_template_placeholder,,1,1,1,1
+access_gcs_whatsapp_template_line_quick_reply,gcs.whatsapp.template.line.quick.reply,model_gcs_whatsapp_template_line_quick_reply,,1,1,1,1
+access_gcs_whatsapp_config,gcs.whatsapp.config,model_gcs_whatsapp_config,,1,1,1,1
+access_gcs_whatsapp_composer,gcs.whatsapp.composer,model_gcs_whatsapp_composer,,1,1,1,1

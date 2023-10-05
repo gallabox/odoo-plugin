@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    below code is written fot the cron job of feedback message for products after delivery-->
+    <record id="gcs_clear_whatsapp_logs_cron" model="ir.cron">
+        <field name="name">Clear Whatsapp Logs Cron</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall"
+               eval="(DateTime.now().replace(hour=18, minute=29) + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>
+        <field name="doall" eval="False"/>
+        <field name="model_id" ref="model_gcs_whatsapp"/>
+        <field name="code">model.gcs_daily_whatsapp_log_clear_cron()</field>
+        <field name="state">code</field>
+    </record>
+</odoo>

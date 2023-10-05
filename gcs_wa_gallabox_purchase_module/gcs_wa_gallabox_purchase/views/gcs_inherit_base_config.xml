@@ -1,0 +1,13 @@
+<odoo>
+    <record id="gcs_base_config_inherit" model="ir.ui.view">
+        <field name="name">GcsInheritBaseConfig</field>
+        <field name="model">gcs.whatsapp.config</field>
+        <field name="inherit_id" ref="gcs_wa_gallabox_base.gcs_whatsapp_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='whatsapp_account_id']" position="after">
+                <field name="confirm_in_purchase"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

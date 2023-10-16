@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': 'Gcs WhatsApp Gallabox Odoo Module For Sales',
+    'name': 'WhatsApp Gallabox Odoo Module For Sales',
     "author": "Geelani Consultancy & Solutions, Gallabox",
     'version': '1.0.0',
     "website": "https://gallabox.com/",
